@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniMax Proxy Simple Test</title>
+</head>
+<body>
+    <h1>MiniMax Proxy Simple Test</h1>
+    
+    <input type="text" id="userInput" placeholder="Deine Nachricht hier..." size="50">
+    <button onclick="sendMessage()">Senden</button>
+    
+    <br><br>
+    
+    <textarea id="response" rows="10" cols="80" readonly placeholder="Antwort erscheint hier..."></textarea>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const responseArea = document.getElementById('response');
+            const message = input.value.trim();
+            
+            if (!message) {
+                alert('Bitte gib eine Nachricht ein!');
+                return;
+            }
+            
+            responseArea.value = 'Sende Anfrage...';
+            
+            try {
+                const response = await fetch('http://localhost:8080/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        messages: [
+                            {
+                                role: 'user',
+                                content: message
+                            }
+                        ]
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP Fehler! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                if (data.choices && data.choices[0] && data.choices[0].message) {
+                    responseArea.value = data.choices[0].message.content;
+                } else {
+                    responseArea.value = 'Fehler: Keine Antwort erhalten\n\n' + JSON.stringify(data, null, 2);
+                }
+                
+            } catch (error) {
+                responseArea.value = 'Fehler: ' + error.message;
+            }
+        }
+        
+        // Enter-Taste im Input-Feld = Senden
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

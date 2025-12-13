@@ -1,0 +1,10 @@
+# Ignoriere Projektmanagement-Dateien
+.plan
+.aufgabe
+
+# Ignoriere Node-Module und Logs
+node_modules/
+npm-debug.log
+
+# Ignoriere Umgebungsvariablen (API Keys!)
+.env
