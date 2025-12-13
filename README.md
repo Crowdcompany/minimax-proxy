@@ -6,8 +6,8 @@ Ein Express.js basierter Proxy-Server für die MiniMax AI API mit vollständiger
 
 ## Live-Deployment
 
-**Basis-URL:** `https://minimaxproxy.ccpn.us` *(falls deployed)*
-**Status:** ⚠️ Noch nicht deployed - lokal nutzbar
+**Basis-URL:** `https://mmproxy.ccpn.cc`
+**Status:** ✅ Live und funktional
 
 ## API-Endpunkt
 
@@ -17,10 +17,10 @@ Proxy-Endpunkt für MiniMax AI Chat Completions API.
 
 #### Vollständige URL
 ```
-https://minimaxproxy.ccpn.us/v1/chat/completions
+https://mmproxy.ccpn.cc/v1/chat/completions
 ```
 
-*(oder lokal: http://localhost:8080/v1/chat/completions)*
+*(Lokale Entwicklung: PORT-Umgebungsvariable muss gesetzt sein)*
 
 #### Request Headers
 ```
@@ -50,7 +50,7 @@ Standard MiniMax API Response im JSON-Format (OpenAI-kompatibel).
 ```javascript
 async function sendMessage(prompt) {
   try {
-    const response = await fetch('https://minimaxproxy.ccpn.us/v1/chat/completions', {
+    const response = await fetch('https://mmproxy.ccpn.cc/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -92,7 +92,7 @@ sendMessage("Hallo, wie geht es dir?")
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'https://minimaxproxy.ccpn.us',
+  baseURL: 'https://mmproxy.ccpn.cc',
   headers: {
     'Content-Type': 'application/json'
   }
@@ -168,18 +168,18 @@ Der Proxy unterstützt vollständig CORS für alle Domains:
 # Abhängigkeiten installieren
 npm install
 
-# Server starten (Port 8080)
-node index.js
+# Server starten (PORT-Umgebungsvariable erforderlich)
+PORT=3000 node index.js
 
 # Mit Docker
 docker build -t minimaxproxy .
-docker run -p 8080:8080 -e OPENAI_API_KEY=your_key minimaxproxy
+docker run -e OPENAI_API_KEY=your_key -e PORT=3000 minimaxproxy
 ```
 
 ## Umgebungsvariablen
 
 - `OPENAI_API_KEY`: Dein MiniMax API-Schlüssel (auf dem Server bereits konfiguriert)
-- `PORT`: Server-Port (Standard: 8080)
+- `PORT`: Server-Port (wird von Platform gesetzt, z.B. 80/443 für HTTP/HTTPS)
 
 ## Fehlerbehandlung
 
