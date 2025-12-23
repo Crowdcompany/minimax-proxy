@@ -22,7 +22,7 @@ app.use(express.json());
 app.post('/v1/chat/completions', async (req, res) => {
     try {
         if (!req.body.model) {
-            req.body.model = 'minimax-m2';
+            req.body.model = 'minimax-m2.1';
         }
 
         const response = await fetch('https://api.minimax.io/v1/chat/completions', {

@@ -2,7 +2,7 @@
 
 Ein Express.js basierter Proxy-Server für die MiniMax AI API mit vollständiger CORS-Unterstützung für Frontend-Anwendungen.
 
-**🔑 WICHTIG:** Dieser Proxy verwendet ein **fest eingestelltes KI-Modell** (`minimax-m2`). Clients benötigen **keinen eigenen MiniMax API-Key**.
+**🔑 WICHTIG:** Dieser Proxy verwendet ein **fest eingestelltes KI-Modell** (`minimax-m2.1`). Clients benötigen **keinen eigenen MiniMax API-Key**.
 
 ## Live-Deployment
 
@@ -39,7 +39,7 @@ Content-Type: application/json
 }
 ```
 
-**💡 Hinweis:** Der `model` Parameter ist optional und wird ignoriert. Der Proxy verwendet immer das fest konfigurierte Modell `minimax-m2`.
+**💡 Hinweis:** Der `model` Parameter ist optional und wird ignoriert. Der Proxy verwendet immer das fest konfigurierte Modell `minimax-m2.1`.
 
 #### Response
 Standard MiniMax API Response im JSON-Format (OpenAI-kompatibel).
@@ -127,7 +127,7 @@ Der Proxy unterstützt vollständig CORS für alle Domains:
 ## Features
 
 - ✅ **Kein API-Key erforderlich** - Proxy übernimmt die Authentifizierung
-- ✅ **Fest konfiguriertes Modell** - `minimax-m2` (Advanced reasoning)
+- ✅ **Fest konfiguriertes Modell** - `minimax-m2.1` (Advanced reasoning)
 - ✅ **Vollständige CORS-Unterstützung** für Web-Anwendungen
 - ✅ **Robuste Fehlerbehandlung** mit strukturierten Antworten
 - ✅ **Direkter Proxy** zu MiniMax AI API
@@ -136,7 +136,7 @@ Der Proxy unterstützt vollständig CORS für alle Domains:
 
 ## KI-Modell
 
-**Fest konfiguriert:** `minimax-m2`
+**Fest konfiguriert:** `minimax-m2.1`
 
 - ✅ **Advanced reasoning** - Starke Problemlösungsfähigkeiten
 - ✅ **OpenAI-kompatibel** - Standard Chat Completions Format
@@ -209,7 +209,7 @@ Bei Problemen oder Fragen erstelle ein Issue im Repository oder kontaktiere den 
 
 | Feature | MiniMax Proxy | OpenRouter Proxy |
 |---------|---------------|------------------|
-| Modell | minimax-m2 | z-ai/glm-4.5-air:free |
+| Modell | minimax-m2.1 | z-ai/glm-4.5-air:free |
 | API | api.minimax.io | openrouter.ai |
 | Kompatibilität | OpenAI-kompatibel | OpenAI-kompatibel |
 | Reasoning | Advanced | Standard |
