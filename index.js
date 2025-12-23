@@ -19,6 +19,29 @@ const corsMiddleware = (req, res, next) => {
 app.use(corsMiddleware);
 app.use(express.json());
 
+// Statische Dateien ausliefern (Frontend)
+app.use(express.static('MiniMaxProxyFrontend'));
+
+// Root-Route zur Frontend-HTML
+app.get('/', (req, res) => {
+    res.sendFile('simple_frontend.html', { root: 'MiniMaxProxyFrontend' });
+});
+
+// Models endpoint für n8n/OpenAI Kompatibilität
+app.get('/v1/models', (req, res) => {
+    res.json({
+        object: "list",
+        data: [
+            {
+                id: "minimax-m2",
+                object: "model",
+                created: 1765630262,
+                owned_by: "minimax"
+            }
+        ]
+    });
+});
+
 app.post('/v1/chat/completions', async (req, res) => {
     try {
         if (!req.body.model) {
@@ -42,4 +65,4 @@ app.post('/v1/chat/completions', async (req, res) => {
     }
 });
 
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT);
